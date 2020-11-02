@@ -8,3 +8,51 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## 1. Confidence intervals
+
+```{r}
+otter_length <- c(38, 41, 50, 27, 32, 41, 48, 60, 43)
+
+t.test(otter_length)
+```
+### Describing uncertainty 
+95% confidence interval [34.79302 ,49.75142] means that in
+95% of the samples we take from the population we would expect to find the population mean within the interval presented
+
+We can specify the mean of the null hypothesis (mu=0) in t.test, otherwise it sets it equal to 0.
+
+## 2. T-tests (1-sample t-test)
+
+See a claim: mean otter length is 50 inches. 
+
+```{r}
+otter_test <- t.test(x=otter_length, mu=50)
+otter_test
+```
+
+If the population mean really is 50 inches then there is a 0.0444 probability that we could have randomly taken a sample from that population that has a mean that is at least as different from 50 as sample mean = 42.2.
+
+
+## 3. 2-sample t-test
+```{r}
+desert_bighorns <- c(32, 44, 18, 26, 50, 33, 42, 40)
+sierra_bighorns <- c(28, 31, 40, 42, 26, 29, 31)
+
+t.test(x= desert_bighorns, y= sierra_bighorns) 
+# Welch Two Sample t-test does not assume equal variance
+```
+In this case 95% confidence interval is the the confidence interval for the difference between the mean values of both samples. 
+
+Alternative hypothesis: true difference in means is not equal to 0. 
+In other words that the means are different. 
+
+p-value says that if these samples are drawn from populations with the same mean (Null hypothesis), then there is 0.8849 probability that we take two samples with the given difference between the means.
+
+p-value: probability that the Null hypothesis is true: probability of our two samples being drawn from a single population, based on comparing how different the means of the samples are
+
+
+
+
+
+
